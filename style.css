@@ -227,6 +227,7 @@ body {
   margin: 0;
   text-transform: uppercase;
   font-feature-settings: "ss02" 1;
+  color: red;
 }
 
 .hero__role {
