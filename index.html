@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JOSE — Product Designer</title>
+
+  <!-- Manrope font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <div class="cursor"></div>
+
+  <!-- NAVIGATION -->
+  <header class="site-header">
+    <nav class="nav">
+      <div class="nav__left">
+        <a href="#hero" class="nav__brand">JOSE</a>
+      </div>
+
+      <div class="nav__center">
+        <a href="#works" class="nav-link">WORKS</a>
+        <a href="#about" class="nav-link">ABOUT</a>
+      </div>
+
+      <div class="nav__right">
+        <span class="nav__time" id="nav-time">18:53 GMT</span>
+        <a href="#contact" class="nav-link nav-link--cta">GET IN TOUCH →</a>
+
+        <button class="nav__toggle" aria-label="Toggle navigation">
+          <span></span><span></span>
+        </button>
+      </div>
+
+      <ul class="nav__mobile">
+        <li><a href="#hero" class="nav-link">HOME</a></li>
+        <li><a href="#works" class="nav-link">WORKS</a></li>
+        <li><a href="#about" class="nav-link">ABOUT</a></li>
+        <li><a href="#contact" class="nav-link">GET IN TOUCH</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- HERO SECTION (exactly like screenshot) -->
+    <section id="hero" class="section hero" data-animate="section">
+      <div class="container hero__grid">
+
+        <div class="hero__content fade-up">
+          <h1 class="hero__title">JOSE</h1>
+          <p class="hero__role">Product Designer</p>
+          <p class="hero__subtitle">
+            Designing AI, SaaS and enterprise products that simplify complex workflows.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PROJECT CARDS BELOW HERO -->
+    <section id="works" class="section works" data-animate="section">
+      <div class="container works__grid fade-up">
+
+        <article class="work-card">
+          <div class="work-card__meta">
+            <span class="work-card__title">AI Enterprise Dashboard</span>
+            <span class="work-card__tag">experimental</span>
+          </div>
+          <div class="work-card__image-wrapper image-reveal">
+            <!-- Place the attached dashboard image at /images/ai-enterprise.png -->
+            <img src="images/ai-enterprise.png"
+                 alt="AI enterprise dashboard" class="work-card__image" loading="lazy">
+          </div>
+        </article>
+
+        <article class="work-card">
+          <div class="work-card__meta">
+            <span class="work-card__title">Financial Inclusion Banking App</span>
+            <span class="work-card__tag">experimental</span>
+          </div>
+          <div class="work-card__image-wrapper image-reveal">
+            <img src="images/financial-inclusion.png"
+                 alt="Banking app" class="work-card__image work-card__image--phone" loading="lazy">
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION (with expertise + international experience) -->
+    <section id="about" class="section about" data-animate="section">
+      <div class="container about__grid">
+
+        <div class="about__visual fade-in">
+          <div class="about__portrait-card">
+            <img src="https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                 alt="Portrait" class="about__portrait" loading="lazy">
+          </div>
+        </div>
+
+        <div class="about__content fade-up">
+          <p class="about__label">ABOUT</p>
+
+          <h2 class="about__title">
+            I’m Joselin FX
+          </h2>
+
+          <p class="about__body">
+            A Product Designer based in Scotland. I design web and mobile apps and design systems for digital products that value clarity,
+            restraint, and longevity. Less noise, more meaning.
+          </p>
+
+          <a href="#contact" class="about__link">LEARN MORE →</a>
+
+          <div class="about__meta-row">
+            <!-- Expertise -->
+            <div class="about__meta-block">
+              <p class="about__meta-label">EXPERTISE</p>
+              <ul class="about__meta-list">
+                <li>Product Design</li>
+                <li>Interaction Design</li>
+                <li>Design System</li>
+                <li>Motion Design</li>
+              </ul>
+            </div>
+
+            <!-- International Experience -->
+            <div class="about__meta-block">
+              <p class="about__meta-label">INTERNATIONAL EXPERIENCE</p>
+              <ul class="about__meta-list">
+                <li>United Kingdom</li>
+                <li>Dubai</li>
+                <li>India</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section contact" data-animate="section">
+      <div class="container contact__grid fade-up">
+
+        <div class="contact__left">
+          <h2 class="contact__title">Let’s Talk</h2>
+        </div>
+
+            </div>
+          </div>
+
+          <a href="mailto:fxjoselin@gmail.com?subject=Project%20Inquiry"
+             class="btn btn--primary magnetic">GET IN TOUCH</a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p class="footer__text">© 2026 Jose · Product Designer</p>
+
+      <div class="footer__social">
+        <a href="#" class="footer__link">Behance</a>
+        <a href="#" class="footer__link">LinkedIn</a>
+        <a href="mailto:fxjoselin@gmail.com" class="footer__link">Email</a>
+        <span class="footer__country">Scotland, UK</span>
+      </div>
+
+      <button class="footer__top">Back to top</button>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
