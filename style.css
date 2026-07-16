@@ -225,6 +225,8 @@ body {
   font-weight: 800;
   letter-spacing: -0.08em;
   margin: 0;
+  text-transform: uppercase;
+  font-feature-settings: "ss02" 1;
 }
 
 .hero__role {
