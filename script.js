@@ -1,5 +1,5 @@
 /* --------------------------------------------------
-   UPDATE GMT TIME IN NAV
+   UPDATE GMT TIME IN NAV (desktop + mobile)
 -------------------------------------------------- */
 const navTime = document.getElementById('nav-time');
 if (navTime) {

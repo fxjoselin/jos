@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>JOS — Product Designer</title>
+  <title>Jos | Product Designer</title>
 
   <!-- Manrope font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,7 +20,10 @@
   <header class="site-header">
     <nav class="nav">
       <div class="nav__left">
-        <a href="#hero" class="nav__brand">JOSE</a>
+        <a href="#hero" class="nav__brand">JOS</a>
+        <button class="nav__toggle" aria-label="Toggle navigation">
+          <span></span><span></span>
+        </button>
       </div>
 
       <div class="nav__center">
@@ -31,10 +34,6 @@
       <div class="nav__right">
         <span class="nav__time" id="nav-time">18:53 GMT</span>
         <a href="#contact" class="nav-link nav-link--cta">GET IN TOUCH →</a>
-
-        <button class="nav__toggle" aria-label="Toggle navigation">
-          <span></span><span></span>
-        </button>
       </div>
 
       <ul class="nav__mobile">
@@ -46,12 +45,12 @@
 
   <main>
 
-    <!-- HERO SECTION (exactly like screenshot) -->
+    <!-- HERO SECTION -->
     <section id="hero" class="section hero" data-animate="section">
       <div class="container hero__grid">
 
         <div class="hero__content fade-up">
-          <h1 class="hero__title">JOSE</h1>
+          <h1 class="hero__title">JOS</h1>
           <p class="hero__role">Product Designer</p>
           <p class="hero__subtitle">
             Designing AI, SaaS and enterprise products that simplify complex workflows.
@@ -71,9 +70,9 @@
             <span class="work-card__tag">experimental</span>
           </div>
           <div class="work-card__image-wrapper image-reveal">
-            <!-- Place the attached dashboard image at /images/ai-enterprise.png -->
-            <img src="images/ai-enterprise.png"
-                 alt="AI enterprise dashboard" class="work-card__image" loading="lazy">
+            <!-- Thumbnail image for AI enterprise dashboard -->
+              <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80"
+                  alt="AI enterprise dashboard thumbnail" class="work-card__image" loading="lazy">
           </div>
         </article>
 
@@ -149,12 +148,10 @@
       <div class="container contact__grid fade-up">
 
         <div class="contact__left">
-          <h2 class="contact__title">Let’s Talk</h2>
+          <h3 class="contact__title">Let’s connect for collaborations and new projects</h3>
         </div>
 
-            </div>
-          </div>
-
+        <div class="contact__right">
           <a href="mailto:fxjoselin@gmail.com?subject=Project%20Inquiry"
              class="btn btn--primary magnetic">GET IN TOUCH</a>
         </div>
