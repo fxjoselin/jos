@@ -187,12 +187,20 @@ body {
   list-style: none;
   margin: 0;
   flex-direction: column;
+  align-items: center;
   gap: 14px;
   box-shadow: var(--shadow-soft);
   transform: translateY(-20px);
   opacity: 0;
   pointer-events: none;
   transition: opacity var(--transition-med), transform var(--transition-med);
+}
+
+.nav__mobile li a {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 8px 12px;
 }
 
 .nav__mobile--open {
