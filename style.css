@@ -5,7 +5,10 @@
   --bg: #ffffff;
   --text-primary: #000000;
   --text-secondary: #333333;
+  --text-muted: #666666;
+  --border: rgba(0, 0, 0, 0.08);
   --border-strong: rgba(0, 0, 0, 0.18);
+  --card: #ffffff;
 
   --radius-card: 18px;
   --radius-pill: 999px;
@@ -95,7 +98,6 @@ body {
   position: relative;
 }
 
-.nav__left,
 .nav__center,
 .nav__right {
   display: flex;
@@ -158,7 +160,7 @@ body {
   color: var(--text-muted);
 }
 
-/* Mobile nav */
+/* Mobile Dropdown Custom Adjustments */
 .nav__toggle {
   display: none;
   width: 40px;
@@ -197,26 +199,15 @@ body {
   transform: translateY(-7px) rotate(-45deg);
 }
 
+/* FIXED DROPDOWN POSITION & BACKGROUND FIX */
 .nav__overlay {
   position: absolute;
-  /* This pushes the menu directly below the navbar container */
   top: 100%;
   left: 0;
   right: 0;
-  
-  /* 100% Solid White Background ensures NO text from behind bleeds through */
   background-color: #ffffff;
-  
-  /* Optional: If you prefer a modern blurred glass look instead, uncomment the lines below: */
-  /* background-color: rgba(255, 255, 255, 0.9); */
-  /* backdrop-filter: blur(20px); */
-  /* -webkit-backdrop-filter: blur(20px); */
-
-  /* Gives a clean separation border at the bottom of the dropdown menu */
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-
-  padding: 40px var(--pad-mobile);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.06);
   opacity: 0;
   pointer-events: none;
   transform: translateY(-10px);
@@ -225,6 +216,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 40px var(--pad-mobile);
 }
 
 .nav__overlay--open {
@@ -233,39 +225,19 @@ body {
   transform: translateY(0);
 }
 
-.nav-menu {
-  /* Positions the menu directly below the navbar */
-  position: absolute;
-  top: 60px; /* Adjust this to match the exact height of your navbar */
-  left: 0;
-  width: 100%;
-  
-  /* The Magic Elements: Semi-transparent background + blur filter */
-  background-color: rgba(255, 255, 255, 0.75); /* White with 75% opacity */
-  backdrop-filter: blur(12px); /* Blurs the background text */
-  -webkit-backdrop-filter: blur(12px); /* Safari support */
-  
-  /* Ensures it floats strictly on top of the background text */
-  z-index: 999; 
-  
-  /* Optional styling for spacing */
-  padding: 20px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-}
-
 .nav__overlay ul {
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
   text-align: center;
 }
 
 .nav__overlay li a {
   display: inline-block;
-  font-size: clamp(12px, 3.5vw, 14px);
+  font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.28em;
   text-transform: uppercase;
@@ -278,42 +250,19 @@ body {
   color: var(--text-secondary);
 }
 
-.nav__overlay li a.nav-link--cta {
-  font-weight: 600;
-}
-
 @media (max-width: 1024px) {
-  .nav {
-    padding: 18px var(--pad-tablet);
-  }
+  .nav { padding: 18px var(--pad-tablet); }
 }
 
 @media (max-width: 768px) {
-  .nav {
-    padding: 18px var(--pad-mobile);
-  }
-
-  .nav__center,
-  .nav__time,
-  .nav__cta {
-    display: none;
-  }
-
-  .nav__toggle {
-    display: flex;
-  }
-
-  .nav__right {
-    gap: 12px;
-  }
-
-  .nav__brand {
-    z-index: 1001;
-  }
+  .nav { padding: 18px var(--pad-mobile); }
+  .nav__center, .nav__time, .nav__cta { display: none; }
+  .nav__toggle { display: flex; }
+  .nav__right { gap: 12px; }
 }
 
 /* --------------------------------------------------
-   HERO — EXACTLY LIKE YOUR FRAMER SCREENSHOT
+   HERO
 -------------------------------------------------- */
 .hero {
   padding-top: 160px;
@@ -331,13 +280,11 @@ body {
 }
 
 .hero__title {
-  font-family: "Manrope", system-ui, sans-serif;
   font-size: clamp(72px, 10vw, 96px);
-  font-weight: 1200;
-  letter-spacing: -0.08em;
+  font-weight: 800;
+  letter-spacing: -0.06em;
   margin: 0;
   text-transform: uppercase;
-  font-feature-settings: "ss02" 1;
   color: var(--text-primary);
 }
 
@@ -365,6 +312,12 @@ body {
   gap: 24px;
 }
 
+.work-card-wrapper {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
 .work-card {
   background-color: var(--card);
   border-radius: var(--radius-card);
@@ -374,13 +327,12 @@ body {
   transition: transform var(--transition-med), box-shadow var(--transition-med);
 }
 
-.work-card:hover {
+.work-card-wrapper:hover .work-card {
   transform: translateY(-6px);
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.12);
 }
 
 .work-card__meta {
-  margin: 0;
   padding: 16px;
 }
 
@@ -404,6 +356,7 @@ body {
 .work-card__image-wrapper {
   border-radius: 14px;
   overflow: hidden;
+  margin: 0 16px;
 }
 
 .work-card__image {
@@ -415,13 +368,13 @@ body {
   transition: transform var(--transition-med), filter var(--transition-med);
 }
 
-.work-card:hover .work-card__image {
+.work-card-wrapper:hover .work-card__image {
   transform: scale(1.03);
   filter: grayscale(0);
 }
 
 /* --------------------------------------------------
-   ABOUT SECTION (with expertise + international experience)
+   ABOUT SECTION
 -------------------------------------------------- */
 .about__grid {
   display: grid;
@@ -475,28 +428,14 @@ body {
   color: var(--text-primary);
 }
 
-/* Expertise + International Experience */
 .about__meta-row {
   display: flex;
   gap: 48px;
   margin-top: 32px;
-  align-items: flex-start;
 }
 
 .about__meta-block {
   flex: 1;
-  margin-top: 0;
-}
-
-@media (max-width: 800px) {
-  .about__meta-row {
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .about__meta-block {
-    margin-top: 32px;
-  }
 }
 
 .about__meta-label {
@@ -519,24 +458,18 @@ body {
   margin-bottom: 4px;
 }
 
+@media (max-width: 800px) {
+  .about__grid { grid-template-columns: 1fr; }
+  .about__meta-row { flex-direction: column; gap: 20px; }
+}
+
 /* --------------------------------------------------
-   CONTACT
+   CONTACT & BUTTONS
 -------------------------------------------------- */
 .contact__grid {
   display: grid;
   grid-template-columns: 6fr 6fr;
   gap: 64px;
-  align-items: center;
-}
-
-.contact__left {
-  display: flex;
-  align-items: center;
-}
-
-.contact__right {
-  display: flex;
-  justify-content: center;
   align-items: center;
 }
 
@@ -546,35 +479,11 @@ body {
   letter-spacing: -0.02em;
 }
 
-.contact__row {
+.contact__right {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
+  justify-content: center;
 }
 
-.contact__row-label {
-  font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: var(--text-muted);
-}
-
-.contact__row-value {
-  font-size: 15px;
-  color: var(--text-secondary);
-  text-decoration: none;
-}
-
-.contact__row-value:hover {
-  color: var(--text-primary);
-}
-
-.contact__social {
-  display: flex;
-  gap: 12px;
-}
-
-/* Button */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -597,8 +506,12 @@ body {
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22);
 }
 
+@media (max-width: 800px) {
+  .contact__grid { grid-template-columns: 1fr; gap: 32px; }
+}
+
 /* --------------------------------------------------
-   FOOTER — Behance, LinkedIn, Email, Country
+   FOOTER
 -------------------------------------------------- */
 .footer {
   border-top: 1px solid rgba(0, 0, 0, 0.06);
@@ -606,9 +519,6 @@ body {
 }
 
 .footer__inner {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 var(--pad-desktop);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -657,13 +567,16 @@ body {
   background-color: rgba(0, 0, 0, 0.04);
 }
 
+@media (max-width: 768px) {
+  .footer__inner { flex-direction: column; align-items: flex-start; gap: 16px; }
+}
+
 /* --------------------------------------------------
    ANIMATION INITIAL STATES
 -------------------------------------------------- */
 [data-animate="section"] .fade-up,
 [data-animate="section"] .fade-in,
-[data-animate="section"] .image-reveal,
-[data-animate="section"] .text-reveal {
+[data-animate="section"] .image-reveal {
   opacity: 0;
   transform: translateY(24px);
 }
@@ -673,52 +586,16 @@ body {
 }
 
 /* --------------------------------------------------
-   RESPONSIVE
+   RESPONSIVE CONTAINERS
 -------------------------------------------------- */
 @media (max-width: 1024px) {
-  .container {
-    padding: 0 var(--pad-tablet);
-  }
-
-  .about__grid,
-  .contact__grid {
-    grid-template-columns: 1fr;
-  }
-
-  .works__grid {
-    grid-template-columns: 1fr;
-  }
+  .container { padding: 0 var(--pad-tablet); }
+  .works__grid { grid-template-columns: 1fr; }
 }
-
 @media (max-width: 768px) {
-  .container {
-    padding: 0 var(--pad-mobile);
-  }
-
-  /* keep nav spacing consistent on small screens */
-  .nav__left {
-    gap: 18px;
-  }
-
-  .section {
-    padding: 100px 0;
-  }
-
-  .footer__inner {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-  }
+  .container { padding: 0 var(--pad-mobile); }
+  .section { padding: 100px 0; }
 }
-
 @media (max-width: 480px) {
-  .hero__title {
-    font-size: 64px;
-  }
-
-  .hero__subtitle,
-  .about__body,
-  .contact__title {
-    font-size: 15px;
-  }
+  .hero__title { font-size: 64px; }
 }

@@ -185,7 +185,7 @@ magneticElements.forEach((el) => {
 const interactiveSelectors = [
   'a',
   'button',
-  '.work-card',
+  '.work-card-wrapper',
   '.about__portrait-card'
 ];
 
