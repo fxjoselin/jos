@@ -92,6 +92,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
 }
 
 .nav__left,
@@ -100,6 +101,13 @@ body {
   display: flex;
   align-items: center;
   gap: 18px;
+}
+
+.nav__center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .nav__brand {
@@ -153,76 +161,155 @@ body {
 /* Mobile nav */
 .nav__toggle {
   display: none;
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   border-radius: 999px;
   border: 1px solid var(--border);
   background-color: transparent;
   align-items: center;
   justify-content: center;
-  gap: 4px;
+  gap: 6px;
   flex-direction: column;
   cursor: pointer;
+  transition: border-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.nav__toggle:hover {
+  border-color: rgba(0, 0, 0, 0.3);
 }
 
 .nav__toggle span {
-  width: 16px;
-  height: 1px;
-  background-color: var(--text-muted);
+  width: 18px;
+  height: 2px;
+  background-color: var(--text-primary);
+  transition: transform var(--transition-fast), opacity var(--transition-fast);
 }
 
-.nav__mobile {
-  display: none;
-  position: fixed;
-  top: 68px;
-  left: 50%;
-  width: calc(100% - 48px);
-  max-width: 520px;
-  transform: translate(-50%, -20px);
+.nav__toggle--open span:first-child {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav__toggle--open span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav__toggle--open span:last-child {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+.nav__overlay {
+  position: absolute;
+  /* This pushes the menu directly below the navbar container */
+  top: 100%;
+  left: 0;
+  right: 0;
+  
+  /* 100% Solid White Background ensures NO text from behind bleeds through */
   background-color: #ffffff;
-  border-radius: 18px;
-  border: 1px solid var(--border);
-  padding: 14px 18px;
-  list-style: none;
-  margin: 0;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 12px;
-  box-shadow: var(--shadow-soft);
+  
+  /* Optional: If you prefer a modern blurred glass look instead, uncomment the lines below: */
+  /* background-color: rgba(255, 255, 255, 0.9); */
+  /* backdrop-filter: blur(20px); */
+  /* -webkit-backdrop-filter: blur(20px); */
+
+  /* Gives a clean separation border at the bottom of the dropdown menu */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+
+  padding: 40px var(--pad-mobile);
   opacity: 0;
   pointer-events: none;
+  transform: translateY(-10px);
   transition: opacity var(--transition-med), transform var(--transition-med);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.nav__mobile li a {
-  display: block;
-  width: 100%;
-  text-align: center;
-  padding: 8px 12px;
-}
-
-.nav__mobile--open {
+.nav__overlay--open {
   opacity: 1;
-  transform: translate(-50%, 0);
   pointer-events: auto;
+  transform: translateY(0);
 }
 
-.nav__mobile li {
+.nav-menu {
+  /* Positions the menu directly below the navbar */
+  position: absolute;
+  top: 60px; /* Adjust this to match the exact height of your navbar */
+  left: 0;
   width: 100%;
+  
+  /* The Magic Elements: Semi-transparent background + blur filter */
+  background-color: rgba(255, 255, 255, 0.75); /* White with 75% opacity */
+  backdrop-filter: blur(12px); /* Blurs the background text */
+  -webkit-backdrop-filter: blur(12px); /* Safari support */
+  
+  /* Ensures it floats strictly on top of the background text */
+  z-index: 999; 
+  
+  /* Optional styling for spacing */
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
-.nav__mobile li a {
-  display: block;
-  width: 100%;
+.nav__overlay ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   text-align: center;
-  padding: 12px 14px;
-  border-radius: 12px;
+}
+
+.nav__overlay li a {
+  display: inline-block;
+  font-size: clamp(12px, 3.5vw, 14px);
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
   text-decoration: none;
   color: var(--text-primary);
+  padding: 8px 14px;
 }
 
-.nav__mobile li a:hover {
-  background-color: rgba(0, 0, 0, 0.04);
+.nav__overlay li a:hover {
+  color: var(--text-secondary);
+}
+
+.nav__overlay li a.nav-link--cta {
+  font-weight: 600;
+}
+
+@media (max-width: 1024px) {
+  .nav {
+    padding: 18px var(--pad-tablet);
+  }
+}
+
+@media (max-width: 768px) {
+  .nav {
+    padding: 18px var(--pad-mobile);
+  }
+
+  .nav__center,
+  .nav__time,
+  .nav__cta {
+    display: none;
+  }
+
+  .nav__toggle {
+    display: flex;
+  }
+
+  .nav__right {
+    gap: 12px;
+  }
+
+  .nav__brand {
+    z-index: 1001;
+  }
 }
 
 /* --------------------------------------------------
@@ -293,8 +380,6 @@ body {
 }
 
 .work-card__meta {
-  display: flex;
-  justify-content: space-between;
   margin: 0;
   padding: 16px;
 }
@@ -304,7 +389,12 @@ body {
   font-weight: 600;
 }
 
+.work-card__footer {
+  padding: 0 16px 16px;
+}
+
 .work-card__tag {
+  display: inline-block;
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.16em;
@@ -343,13 +433,13 @@ body {
   background-color: var(--card);
   border-radius: var(--radius-card);
   border: 1px solid var(--border);
-  padding: 16px;
+  padding: 1px;
   box-shadow: var(--shadow-soft);
 }
 
 .about__portrait {
   width: 100%;
-  height: 320px;
+  height: 420px;
   object-fit: cover;
   border-radius: 14px;
 }
@@ -603,18 +693,6 @@ body {
 @media (max-width: 768px) {
   .container {
     padding: 0 var(--pad-mobile);
-  }
-
-  .nav__center {
-    display: none;
-  }
-
-  .nav__toggle {
-    display: inline-flex;
-  }
-
-  .nav__mobile {
-    display: flex;
   }
 
   /* keep nav spacing consistent on small screens */

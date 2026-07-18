@@ -19,12 +19,7 @@
   <!-- NAVIGATION -->
   <header class="site-header">
     <nav class="nav">
-      <div class="nav__left">
-        <a href="#hero" class="nav__brand">JOS</a>
-        <button class="nav__toggle" aria-label="Toggle navigation">
-          <span></span><span></span>
-        </button>
-      </div>
+      <a href="#hero" class="nav__brand">JOS</a>
 
       <div class="nav__center">
         <a href="#works" class="nav-link">WORKS</a>
@@ -33,13 +28,21 @@
 
       <div class="nav__right">
         <span class="nav__time" id="nav-time">18:53 GMT</span>
-        <a href="#contact" class="nav-link nav-link--cta">GET IN TOUCH →</a>
+        <a href="#contact" class="nav-link nav__cta">GET IN TOUCH →</a>
+        <button class="nav__toggle" aria-label="Open navigation menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
 
-      <ul class="nav__mobile">
-        <li><a href="#works" class="nav-link">WORKS</a></li>
-        <li><a href="#about" class="nav-link">ABOUT</a></li>
-      </ul>
+      <div class="nav__overlay" aria-hidden="true">
+        <ul>
+          <li><a href="#works" class="nav-link">Work</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#contact" class="nav-link nav-link--cta">Get in Touch →</a></li>
+        </ul>
+      </div>
     </nav>
   </header>
 
@@ -67,23 +70,27 @@
         <article class="work-card">
           <div class="work-card__meta">
             <span class="work-card__title">AI Enterprise Dashboard</span>
-            <span class="work-card__tag">experimental</span>
           </div>
           <div class="work-card__image-wrapper image-reveal">
             <!-- Thumbnail image for AI enterprise dashboard -->
-              <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80"
+              <img src="images/Copilot_20260717_152650.png"
                   alt="AI enterprise dashboard thumbnail" class="work-card__image" loading="lazy">
+          </div>
+          <div class="work-card__footer">
+            <span class="work-card__tag">experimental</span>
           </div>
         </article>
 
         <article class="work-card">
           <div class="work-card__meta">
             <span class="work-card__title">Financial Inclusion Banking App</span>
-            <span class="work-card__tag">experimental</span>
           </div>
           <div class="work-card__image-wrapper image-reveal">
-            <img src="images/financial-inclusion.png"
+            <img src="images/Copilot_20260717_152650.png"
                  alt="Banking app" class="work-card__image work-card__image--phone" loading="lazy">
+          </div>
+          <div class="work-card__footer">
+            <span class="work-card__tag">experimental</span>
           </div>
         </article>
 
@@ -96,7 +103,7 @@
 
         <div class="about__visual fade-in">
           <div class="about__portrait-card">
-            <img src="https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=1200"
+            <img src="images/Copilot_20260716_170156.png"
                  alt="Portrait" class="about__portrait" loading="lazy">
           </div>
         </div>

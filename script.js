@@ -38,19 +38,32 @@ document.querySelectorAll('a[href^="#"]').forEach((link) => {
    MOBILE NAVIGATION
 -------------------------------------------------- */
 const navToggle = document.querySelector('.nav__toggle');
-const navMobile = document.querySelector('.nav__mobile');
+const navOverlay = document.querySelector('.nav__overlay');
 
-if (navToggle && navMobile) {
+if (navToggle && navOverlay) {
   navToggle.addEventListener('click', () => {
-    navToggle.classList.toggle('nav__toggle--open');
-    navMobile.classList.toggle('nav__mobile--open');
+    const isOpen = navToggle.classList.toggle('nav__toggle--open');
+    navOverlay.classList.toggle('nav__overlay--open');
+    navToggle.setAttribute('aria-expanded', String(isOpen));
+    navOverlay.setAttribute('aria-hidden', String(!isOpen));
   });
 
-  navMobile.querySelectorAll('.nav-link').forEach((link) => {
+  navOverlay.querySelectorAll('.nav-link').forEach((link) => {
     link.addEventListener('click', () => {
       navToggle.classList.remove('nav__toggle--open');
-      navMobile.classList.remove('nav__mobile--open');
+      navOverlay.classList.remove('nav__overlay--open');
+      navToggle.setAttribute('aria-expanded', 'false');
+      navOverlay.setAttribute('aria-hidden', 'true');
     });
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!navOverlay.contains(event.target) && !navToggle.contains(event.target)) {
+      navToggle.classList.remove('nav__toggle--open');
+      navOverlay.classList.remove('nav__overlay--open');
+      navToggle.setAttribute('aria-expanded', 'false');
+      navOverlay.setAttribute('aria-hidden', 'true');
+    }
   });
 }
 
