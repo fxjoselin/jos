@@ -577,7 +577,7 @@ body {
 [data-animate="section"] .fade-up,
 [data-animate="section"] .fade-in,
 [data-animate="section"] .image-reveal {
-  opacity: 0;
+  opacity: 1;
   transform: translateY(24px);
 }
 
