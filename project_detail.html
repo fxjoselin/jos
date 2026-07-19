@@ -11,6 +11,254 @@
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="style.css"/>
+
+  <style>
+    /* --------------------------------------------------
+       SPLIT HERO SECTION CUSTOM STYLES
+    -------------------------------------------------- */
+    .split-hero {
+      position: relative;
+      width: 100%;
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+      background-color: #ffffff;
+      padding-top: 100px;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .split-hero__container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    /* Sides Base Layout */
+    .split-side {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 60px 40px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .split-side--left {
+      align-items: flex-end;
+      text-align: right;
+      padding-right: 80px;
+    }
+
+    .split-side--right {
+      align-items: flex-start;
+      text-align: left;
+      padding-left: 80px;
+    }
+
+    /* Content Styling */
+    .split-side h1 {
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 800;
+      margin: 0 0 12px 0;
+      letter-spacing: -0.02em;
+      color: #000000;
+    }
+
+    .split-side p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #444444;
+      max-width: 340px;
+      margin: 0;
+    }
+
+    /* Center Graphics Assembly (Replacing the Face) */
+    .split-center-graphic {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 320px;
+      height: 450px;
+      z-index: 1;
+      pointer-events: none;
+      display: flex;
+    }
+
+    /* Center line split divider */
+    .split-center-graphic::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      width: 1px;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.08);
+      z-index: 5;
+    }
+
+    .graphic-half {
+      width: 50%;
+      height: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Designer Side Graphic - Abstract Art */
+    .graphic-half--left {
+      background: linear-gradient(135deg, #ff7b00, #ffae00, #e81cff, #00d2ff);
+      border-top-left-radius: 160px;
+      border-bottom-left-radius: 160px;
+      opacity: 0.85;
+      filter: saturate(1.2);
+    }
+
+    /* Coder Side Graphic - Clean Minimalist Code Snippet */
+    .graphic-half--right {
+      background: #fafafa;
+      border-top-right-radius: 160px;
+      border-bottom-right-radius: 160px;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      border-left: none;
+      padding: 40px 15px;
+      font-family: monospace;
+      font-size: 11px;
+      line-height: 1.5;
+      color: #666666;
+    }
+
+    .graphic-half--right pre {
+      margin: 0;
+      opacity: 0.5;
+    }
+
+    /* --------------------------------------------------
+       CASE STUDY (STRICT LEFT ALIGNMENT)
+    -------------------------------------------------- */
+    .case-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 80px var(--pad-desktop);
+      text-align: left;
+    }
+
+    .back-to-home {
+      display: inline-block;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      text-decoration: none;
+      color: #666;
+      margin-bottom: 40px;
+    }
+
+    .case-block {
+      margin-bottom: 64px;
+      text-align: left;
+    }
+
+    .case-block h2 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin: 0 0 16px 0;
+      color: #000000;
+    }
+
+    .case-block p {
+      font-size: 16px;
+      line-height: 1.8;
+      color: #333333;
+      margin: 0;
+    }
+
+    /* Meta bar */
+    .case-meta-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      padding: 32px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      margin-bottom: 64px;
+    }
+
+    .meta-box {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .meta-box span {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #666;
+    }
+
+    .meta-box strong {
+      font-size: 14px;
+      font-weight: 600;
+      color: #000;
+    }
+
+    /* UI Screens */
+    .ui-showcase {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      margin-top: 24px;
+    }
+
+    .ui-frame {
+      background: #fcfcfc;
+      border: 1px solid rgba(0,0,0,0.06);
+      padding: 24px;
+      border-radius: 16px;
+    }
+
+    .ui-frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+    }
+
+    .ui-frame-caption {
+      display: block;
+      margin-top: 12px;
+      font-size: 13px;
+      color: #666;
+    }
+
+    /* Responsive Handling */
+    @media (max-width: 900px) {
+      .split-hero__container {
+        grid-template-columns: 1fr;
+      }
+      .split-side--left {
+        align-items: center;
+        text-align: center;
+        padding-right: 40px;
+      }
+      .split-side--right {
+        align-items: center;
+        text-align: center;
+        padding-left: 40px;
+      }
+      .split-center-graphic {
+        display: none; /* Hides graphic overlay nicely on tablet/mobile */
+      }
+      .case-meta-strip {
+        grid-template-columns: 1fr 1fr;
+      }
+      .case-container {
+        padding: 40px var(--pad-mobile);
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -18,83 +266,127 @@
 
   <!-- NAVIGATION -->
   <header class="site-header">
-    <nav class="nav">
-      <a href="index.html" class="nav__brand">JOS</a>
-      <div class="nav__center">
-        <a href="index.html#works" class="nav-link">WORKS</a>
-        <a href="index.html#about" class="nav-link">ABOUT</a>
-      </div>
-      <div class="nav__right">
-        <span class="nav__time" id="nav-time">18:53 GMT</span>
-        <a href="index.html#contact" class="nav-link nav__cta">GET IN TOUCH →</a>
+    <nav class="main-nav" role="navigation" aria-label="Main navigation">
+      <a href="index.html" class="main-nav__brand">JOSE</a>
+      <button class="hamburger" aria-expanded="false" aria-label="Toggle menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+      <div class="main-nav__menu-wrapper" aria-hidden="true">
+        <ul class="main-nav__menu">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">Portfolio</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
       </div>
     </nav>
   </header>
 
   <main>
-    <!-- PROJECT HERO -->
-    <section class="section" style="padding-top: 180px; padding-bottom: 40px;">
-      <div class="container">
-        <a href="index.html#works" style="font-size: 13px; text-transform: uppercase; letter-spacing: 0.16em; text-decoration: none; color: #333; display: inline-block; margin-bottom: 24px;">← Back to Works</a>
+    
+    <!-- THE VISUAL CONCEPT SPLIT HERO -->
+    <section class="split-hero">
+      <div class="split-hero__container">
         
-        <h1 style="font-size: clamp(36px, 6vw, 56px); font-weight: 700; letter-spacing: -0.04em; margin: 0 0 16px 0;">AI Enterprise Dashboard</h1>
-        <p style="font-size: clamp(16px, 2.5vw, 20px); line-height: 1.6; color: #333; max-width: 720px; margin: 0 0 48px 0;">Designing AI, SaaS and enterprise products that simplify complex workflows.</p>
-        
-        <!-- Project Details Grid -->
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 24px; border-top: 1px solid rgba(0,0,0,0.18); padding-top: 32px;">
-          <div>
-            <p style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: #666; margin: 0 0 6px 0;">INDUSTRY</p>
-            <strong style="font-size: 15px; font-weight: 600;">SaaS / Enterprise AI</strong>
-          </div>
-          <div>
-            <p style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: #666; margin: 0 0 6px 0;">DURATION</p>
-            <strong style="font-size: 15px; font-weight: 600;">3 Months (2026)</strong>
-          </div>
-          <div>
-            <p style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: #666; margin: 0 0 6px 0;">OUTCOME</p>
-            <strong style="font-size: 15px; font-weight: 600;">Simplified Workflow</strong>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CASE STUDY CONTENT -->
-    <section class="section" style="padding-top: 40px;">
-      <div class="container" style="max-width: var(--max-width); display: flex; flex-direction: column; gap: 48px; align-items: flex-start;">
-        
-        <div>
-          <h2 style="font-size: 24px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 16px;">The Problem</h2>
-          <p style="font-size: 16px; line-height: 1.75; color: #333;">Enterprise users were overwhelmed by massive quantities of unstructured data. The existing dashboard suffered from cognitive overload, forcing data analysts to jump between multiple tabs just to understand a single anomaly.</p>
+        <!-- Left Side: Designer -->
+        <div class="split-side split-side--left">
+          <h1>designer</h1>
+          <p>Product designer specializing in clean UI design, strategic design systems, and interaction models.</p>
         </div>
 
-        <div>
-          <h2 style="font-size: 24px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 16px;">The Solution</h2>
-          <p style="font-size: 16px; line-height: 1.75; color: #333;">We consolidated the data stream into an AI-assisted main workflow. By adding predictive summaries and micro-interactions, we allowed analysts to scan, drill down, and diagnose system anomalies from a unified view without changing context.</p>
+        <!-- Center Shared Asset -->
+        <div class="split-center-graphic">
+          <div class="graphic-half graphic-half--left"></div>
+          <div class="graphic-half graphic-half--right">
+<pre>
+&lt;html&gt;
+ height:184px;}
+ class="jedi"&gt;
+ CSS3 HTML5
+ color:#000;
+ jQuery
+</pre>
+          </div>
         </div>
 
-        <div>
-          <h2 style="font-size: 24px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 16px;">UI Screens</h2>
-          <div style="background: #f9f9f9; padding: 24px; border-radius: 18px; border: 1px solid rgba(0,0,0,0.05); margin-top: 16px;">
-            <img src="images/Copilot_20260717_152650.png" alt="UI Screen Layout" style="width: 100%; height: auto; display: block; border-radius: 8px; box-shadow: 0 8px 30px rgba(0,0,0,0.04);">
-          </div>
+        <!-- Right Side: Coder -->
+        <div class="split-side split-side--right">
+          <h1>&lt;coder&gt;</h1>
+          <p>Front end developer who writes functional, semantic, elegant, and production-efficient code frameworks.</p>
         </div>
 
       </div>
     </section>
+
+    <!-- METADATA & CASE STUDY SECTION (Left Aligned) -->
+    <section class="case-content">
+      <div class="case-container">
+        
+        <a href="index.html#works" class="back-to-home">← Back to Works</a>
+
+        <!-- Project Overview Metadata Row -->
+        <div class="case-meta-strip">
+          <div class="meta-box">
+            <span>Project Name</span>
+            <strong>AI Dashboard Layout</strong>
+          </div>
+          <div class="meta-box">
+            <span>Industry</span>
+            <strong>SaaS / Systems</strong>
+          </div>
+          <div class="meta-box">
+            <span>Duration</span>
+            <strong>3 Months</strong>
+          </div>
+          <div class="meta-box">
+            <span>Outcome</span>
+            <strong>Streamlined UX</strong>
+          </div>
+        </div>
+
+        <!-- PROBLEM BLOCK -->
+        <div class="case-block">
+          <h2>The Problem</h2>
+          <p>
+            Enterprise users routinely deal with vast amounts of unstructured, disjointed data streams. Current enterprise dash interfaces cause extreme cognitive fatigue, forcing workers to dig deep across multiple navigation paths and layout systems just to isolate a simple operational system event or error message log.
+          </p>
+        </div>
+
+        <!-- SOLUTION BLOCK -->
+        <div class="case-block">
+          <h2>The Solution</h2>
+          <p>
+            We established an integrated, micro-interaction workflow pattern. By condensing contextual summaries directly inside core operational pipelines, designers ensure analysts can scan status loops, execute granular adjustments, and handle critical structural anomalies natively from a single unified screen layout without losing focus.
+          </p>
+        </div>
+
+        <!-- UI SCREENS SHOWCASE -->
+        <div class="case-block">
+          <h2>UI Screens</h2>
+          <p>High-fidelity system displays demonstrating left-aligned analytical charts, filter panels, and operational windows.</p>
+          
+          <div class="ui-showcase">
+            
+            <div class="ui-frame">
+              <img src="images/Copilot_20260717_152650.png" alt="System view framework">
+              <span class="ui-frame-caption">Fig 2.1 — Global workspace display showing active tracking fields.</span>
+            </div>
+
+            <div class="ui-frame">
+              <img src="images/Copilot_20260717_152650.png" alt="Modal focus architecture">
+              <span class="ui-frame-caption">Fig 2.2 — Inline contextual data display configuration window.</span>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
   </main>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="container footer__inner">
-      <p class="footer__text">© 2026 Jose · Product Designer</p>
-      <div class="footer__social">
-        <a href="#" class="footer__link">Behance</a>
-        <a href="#" class="footer__link">LinkedIn</a>
-        <a href="mailto:fxjoselin@gmail.com" class="footer__link">Email</a>
-        <span class="footer__country">Scotland, UK</span>
-      </div>
-    </div>
-  </footer>
 
   <script src="script.js"></script>
 </body>

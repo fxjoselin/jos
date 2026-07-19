@@ -68,8 +68,34 @@ if (navToggle && navOverlay) {
 }
 
 /* --------------------------------------------------
+   MAIN NAV TOGGLE
+-------------------------------------------------- */
+const mainNavButton = document.querySelector('.hamburger');
+const mainNavMenu = document.querySelector('.main-nav__menu-wrapper');
+const mainNavLinks = document.querySelectorAll('.main-nav__menu a');
+
+if (mainNavButton && mainNavMenu) {
+  mainNavButton.addEventListener('click', () => {
+    const active = mainNavButton.classList.toggle('is-active');
+    mainNavMenu.classList.toggle('is-active');
+    mainNavButton.setAttribute('aria-expanded', active ? 'true' : 'false');
+    mainNavMenu.setAttribute('aria-hidden', active ? 'false' : 'true');
+  });
+
+  mainNavLinks.forEach((link) => {
+    link.addEventListener('click', () => {
+      mainNavButton.classList.remove('is-active');
+      mainNavMenu.classList.remove('is-active');
+      mainNavButton.setAttribute('aria-expanded', 'false');
+      mainNavMenu.setAttribute('aria-hidden', 'true');
+    });
+  });
+}
+
+/* --------------------------------------------------
    SECTION REVEAL ANIMATIONS
 -------------------------------------------------- */
+
 const animatedSections = document.querySelectorAll('[data-animate="section"]');
 
 const observerOptions = {
