@@ -1,126 +1,478 @@
-/* ------------------------------
-   GLOBAL NAV
------------------------------- */
-.site-header {
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ==========================================================================
+   NAVIGATION BAR
+   ========================================================================== */
+.navbar {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
-  background: rgba(255,255,255,0.98);
-  border-bottom: 1px solid rgba(15,23,42,0.06);
+  width: 100%;
+  background-color: var(--bg-color);
+  border-bottom: 1px solid var(--border-color);
+  padding: 20px 40px;
+  z-index: 100;
+  transition: all 0.4s ease;
 }
 
-.main-nav {
-  max-width: 1200px;
+.nav-container {
+  max-width: 1300px;
   margin: 0 auto;
-  padding: 18px 40px;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  gap: 24px;
+  align-items: center;
 }
 
-.main-nav__left { display:flex; align-items:center; justify-content:flex-start; min-width:160px }
-.main-nav__brand { color:#111827; font-weight:800; letter-spacing:0.24em; text-transform:uppercase; font-family: 'Inter', system-ui, sans-serif; text-decoration:none }
-
-.main-nav__menu-wrapper { flex:1; display:flex; align-items:center; justify-content:center }
-.main-nav__menu { list-style:none; margin:0; padding:0; display:flex; gap:28px; align-items:center }
-.main-nav__menu a { color:#6b7280; text-decoration:none; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; font-size:13px; transition:color 180ms ease }
-.main-nav__menu a:hover { color:#111827 }
-
-.main-nav__actions { display:flex; align-items:center; gap:16px; justify-content:flex-end; min-width:220px }
-.main-nav__time { color:#6b7280; font-size:13px; letter-spacing:0.12em; text-transform:uppercase }
-.main-nav__cta { color:#111827; font-weight:700; text-decoration:none; letter-spacing:0.12em; text-transform:uppercase }
-
-@media (max-width: 768px) {
-  .main-nav { padding: 12px 20px; }
-  .main-nav__left { justify-content:flex-start }
-  .main-nav__menu-wrapper { order: 3 }
-  .main-nav__menu { gap: 18px; }
-  .main-nav__actions { order: 2; min-width: auto }
-  .main-nav__menu a, .main-nav__cta, .main-nav__time { font-size: 14px }
+.nav-left {
+  flex: 1;
 }
 
-/* ------------------------------
-   HERO SECTION
------------------------------- */
-.hero {
-  padding: 120px 0;
+.nav-logo {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--text-main);
+  transition: color 0.4s ease;
+}
+
+.nav-center {
+  flex: 1;
   display: flex;
   justify-content: center;
-  align-items: center;
+  gap: 48px;
 }
 
-.hero__inner {
-  width: 90%;
-  max-width: 1400px;
+.nav-link {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+  color: var(--text-main);
+}
+
+.nav-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 32px;
+}
+
+.nav-time {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: color 0.4s ease;
+}
+
+.nav-cta {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text-main);
+  text-decoration: none;
+  padding: 8px 16px;
+  border: 1px solid var(--text-main);
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.nav-cta:hover {
+  background-color: var(--text-main);
+  color: var(--bg-color);
+}
+
+/* Hamburger Menu (Hidden on Desktop) */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  gap: 5px;
+}
+
+.hamburger-line {
+  width: 24px;
+  height: 2px;
+  background-color: var(--text-main);
+  transition: all 0.3s ease;
+  border-radius: 1px;
+}
+
+.hamburger.active .hamburger-line:nth-child(1) {
+  transform: rotate(45deg) translate(10px, 10px);
+}
+
+.hamburger.active .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active .hamburger-line:nth-child(3) {
+  transform: rotate(-45deg) translate(8px, -8px);
+}
+
+/* Mobile Menu (Hidden by Default) */
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px 40px;
+  background-color: var(--bg-color);
+  border-top: 1px solid var(--border-color);
+}
+
+.mobile-menu.active {
+  display: flex;
+}
+
+.mobile-link {
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.mobile-link:hover {
+  color: var(--text-main);
+}
+
+.mobile-link-cta {
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text-main);
+  text-decoration: none;
+  padding: 10px 16px;
+  border: 1px solid var(--text-main);
+  border-radius: 4px;
+  text-align: center;
+  transition: all 0.2s ease;
+  display: inline-block;
+}
+
+.mobile-link-cta:hover {
+  background-color: var(--text-main);
+  color: var(--bg-color);
+}
+
+.mobile-time {
+  display: block;
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin: 12px 0;
+  transition: color 0.4s ease;
+}
+
+/* Blueprint/Dark Theme */
+[data-theme="blueprint"] .navbar {
+  background-color: var(--bg-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+:root {
+  --bg-color: #f5f5f5;
+  --text-main: #1a1a1a;
+  --text-muted: #666666;
+  --text-light: #999999;
+  --border-color: rgba(0, 0, 0, 0.08);
+  
+  /* Watch Variables - Normal Mode */
+  --watch-case: #111111;
+  --watch-screen: #000000;
+  --watch-accent: #3b82f6;
+  --watch-text: #ffffff;
+  
+  --mx: 0px;
+  --my: 0px;
+}
+
+/* ==========================================================================
+   BLUEPRINT/WIREFRAME MODE OVERRIDES
+   ========================================================================== */
+[data-theme="blueprint"] {
+  --bg-color: #050b14;
+  --text-main: #ffffff;
+  --text-muted: #abb2bf;
+  --text-light: #5c6370;
+  --border-color: rgba(97, 175, 239, 0.2);
+
+  /* Blueprint Specific Watch Accents */
+  --watch-case: #1e1e24;
+  --watch-screen: #0a1128;
+  --watch-accent: #ffffff; /* White */
+  --watch-text: #ffffff;
+}
+
+/* ==========================================================================
+   GLOBAL RESETS & LAYOUT
+   ========================================================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.4s ease, color 0.4s ease;
+  overflow-x: hidden;
+}
+
+.hero-section {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 40px 80px 40px;
+  margin-top: 20px;
+}
+
+.hero-container {
+  max-width: 1100px;
+  width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.1fr 1fr;
   gap: 80px;
   align-items: center;
 }
 
-.hero__column {
-  text-align: left;
-}
-
-.hero__title {
-  font-family: 'Manrope', sans-serif;
-  font-size: 32px;
-  font-weight: 700;
-  margin-top: 32px;
-  margin-bottom: 12px;
-}
-
-.hero__desc {
-  font-family: 'Manrope', sans-serif;
-  font-size: 18px;
-  line-height: 1.6;
-  max-width: 420px;
-  opacity: 0.85;
-}
-
-/* ------------------------------
-   WATCH FRAMES
------------------------------- */
-.watch-frame {
-  width: 260px;
-  height: 320px;
-  border-radius: 42px;
-  background: #000;
-  padding: 22px;
+/* ==========================================================================
+   WATCH CANVAS
+   ========================================================================== */
+.hero-visual {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 0 0 3px #111, 0 12px 32px rgba(0,0,0,0.25);
+  height: 550px;
+  perspective: 1000px;
 }
 
-.watch-frame.wireframe {
-  background: #fff;
-  box-shadow: 0 0 0 3px #ddd, 0 12px 32px rgba(0,0,0,0.15);
+.watch-case {
+  position: relative;
+  width: 260px;
+  height: 320px;
+  background-color: var(--watch-case);
+  border-radius: 48px;
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.15);
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s ease;
+  transform-style: preserve-3d;
+}
+
+/* Blueprint mode adds a subtle white glow to the watch frame */
+[data-theme="blueprint"] .watch-case {
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.2), 0 40px 80px rgba(0,0,0,0.5);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.watch-crown {
+  position: absolute;
+  right: -8px;
+  top: 70px;
+  width: 10px;
+  height: 44px;
+  background: linear-gradient(to bottom, #444, #222, #444);
+  border-radius: 4px 6px 6px 4px;
+  cursor: pointer;
+  z-index: 10;
+  transition: transform 0.1s ease;
+}
+
+.watch-crown:active {
+  transform: scaleX(0.8);
 }
 
 .watch-screen {
+  position: relative;
   width: 100%;
-  height: auto;
-  border-radius: 30px;
+  height: 100%;
+  background-color: var(--watch-screen);
+  border-radius: 38px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px;
+  transition: background-color 0.4s ease;
 }
 
-/* ------------------------------
-   RESPONSIVE
------------------------------- */
-@media (max-width: 900px) {
-  .hero__inner {
-    grid-template-columns: 1fr;
-    gap: 60px;
-  }
+/* Dynamic grid change when theme matches blueprint */
+.watch-bg-layer {
+  position: absolute;
+  top: -10%;
+  left: -10%;
+  width: 120%;
+  height: 120%;
+  background-image: radial-gradient(var(--watch-accent) 1px, transparent 1px);
+  background-size: 16px 16px;
+  opacity: 0.15;
+  pointer-events: none;
+  transform: translate3d(calc(var(--mx) * -0.15), calc(var(--my) * -0.15), 0);
+  transition: transform 0.15s ease-out;
+}
 
-  .hero__column {
-    text-align: center;
-  }
+[data-theme="blueprint"] .watch-bg-layer {
+  /* Blueprint engineering grid pattern */
+  background-image: linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.4;
+}
 
-  .hero__desc {
-    margin: 0 auto;
-  }
+/* Watch Content Elements */
+.watch-header, .watch-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--watch-text);
+  z-index: 2;
+  transition: color 0.4s ease;
+}
+
+.watch-header .accent-pill {
+  background-color: var(--watch-accent);
+  color: #000;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size: 0.65rem;
+  font-weight: 700;
+}
+
+[data-theme="blueprint"] .accent-pill {
+  background-color: transparent;
+  color: var(--watch-accent);
+  border: 1px dashed var(--watch-accent);
+}
+
+.watch-body {
+  text-align: center;
+  z-index: 2;
+  transform: translate3d(calc(var(--mx) * 0.25), calc(var(--my) * 0.25), 0);
+  transition: transform 0.15s ease-out;
+}
+
+/* UI Mode Display View */
+.ui-view {
+  display: block;
+}
+
+[data-theme="blueprint"] .ui-view {
+  display: none;
+}
+
+.watch-time {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 2.5rem;
+  font-weight: 500;
+  color: var(--watch-text);
+  letter-spacing: -0.02em;
+}
+
+.watch-seconds {
+  font-size: 1.1rem;
+  color: var(--watch-accent);
+}
+
+/* Blueprint / Code View (Hidden by default) */
+.blueprint-view {
+  display: none;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  text-align: left;
+  color: #a6e22e; /* Code Green */
+  line-height: 1.4;
+  border: 1px dashed rgba(0, 229, 255, 0.4);
+  padding: 8px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="blueprint"] .blueprint-view {
+  display: block;
+}
+
+.blueprint-view .property { color: #39FF14; } /* Neon Green */
+.blueprint-view .value { color: #FF2D95; } /* Neon Pink */
+
+/* Helper Tooltip Badge */
+.interaction-hint {
+  position: absolute;
+  bottom: 40px;
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 30px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  pointer-events: none;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  animation: float 3s ease-in-out infinite;
+}
+
+[data-theme="blueprint"] .interaction-hint {
+  background: var(--watch-screen);
+  border: 1px dashed var(--watch-accent);
+  color: var(--watch-accent);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+/* ==========================================================================
+   RIGHT COLUMN TYPOGRAPHY & ROWS
+   ========================================================================== */
+.intro-title { font-size: 1.25rem; font-weight: 1000; letter-spacing: -0.02em; margin-bottom: 36px; }
+.intro-text { font-size: 1.05rem; line-height: 1.65; color: var(--text-muted); max-width: 480px; margin-bottom: 24px; }
+.intro-text strong { font-weight: 600; color: var(--text-main); }
+.intro-text.sub { margin-bottom: 60px; }
+.intro-text a { color: var(--text-main); text-decoration: none; border-bottom: 1px solid var(--text-main); padding-bottom: 2px; }
+
+.experience-section { max-width: 480px; }
+.section-label { display: block; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-light); margin-bottom: 16px; border-bottom: 1px solid var(--border-color); padding-bottom: 12px; }
+.exp-row { display: grid; grid-template-columns: 1.2fr 2fr; padding: 20px 0; border-bottom: 1px solid var(--border-color); }
+.exp-row:last-child { border-bottom: none; }
+.exp-company { font-size: 0.95rem; font-weight: 600; color: var(--text-main); }
+.exp-role h4 { font-size: 0.95rem; font-weight: 400; color: var(--text-muted); margin-bottom: 4px; }
+.exp-role p { font-size: 0.85rem; color: var(--text-light); }
+
+@media (max-width: 912px) {
+  /* Navigation Mobile Styles */
+  .navbar { padding: 16px 24px; }
+  .nav-container { justify-content: space-between; }
+  .nav-center { display: none; }
+  .nav-right { display: none; }
+  .hamburger { display: flex; }
+  .mobile-menu { padding: 16px 24px; }
+  
+  /* Hero Section Styles */
+  .hero-container { grid-template-columns: 1fr; gap: 40px; }
+  .hero-section { padding: 100px 24px 60px 24px; }
+  .hero-visual { height: 400px; }
+  .watch-case { width: 220px; height: 280px; }
 }

@@ -1,236 +1,118 @@
-/* --------------------------------------------------
-   UPDATE GMT TIME IN NAV (desktop + mobile)
--------------------------------------------------- */
-const navTime = document.getElementById('nav-time');
-if (navTime) {
-  const updateTime = () => {
-    const now = new Date();
-    const hours = String(now.getUTCHours()).padStart(2, '0');
-    const minutes = String(now.getUTCMinutes()).padStart(2, '0');
-    navTime.textContent = `${hours}:${minutes} GMT`;
-  };
-  updateTime();
-  setInterval(updateTime, 60000);
+// 1. LIVE INTERNAL DIGITAL CLOCK COMPONENT
+function updateWatchClock() {
+  const timeContainer = document.getElementById('liveTime');
+  const secondsContainer = document.getElementById('liveSeconds');
+  const navTimeContainer = document.getElementById('liveTimeNav');
+  const mobileTimeContainer = document.getElementById('mobileTimeDisplay');
+  
+  const now = new Date();
+  let hours = now.getHours();
+  let minutes = now.getMinutes();
+  let seconds = now.getSeconds();
+  
+  hours = hours < 10 ? '0' + hours : hours;
+  minutes = minutes < 10 ? '0' + minutes : minutes;
+  seconds = seconds < 10 ? '0' + seconds : seconds;
+  
+  if(timeContainer && secondsContainer) {
+    timeContainer.textContent = `${hours}:${minutes}`;
+    secondsContainer.textContent = `:${seconds}`;
+  }
+  
+  if(navTimeContainer) {
+    navTimeContainer.textContent = `${hours}:${minutes} GMT`;
+  }
+  
+  if(mobileTimeContainer) {
+    mobileTimeContainer.textContent = `${hours}:${minutes} GMT`;
+  }
 }
+setInterval(updateWatchClock, 1000);
+updateWatchClock();
 
-/* --------------------------------------------------
-   SMOOTH SCROLL FOR INTERNAL LINKS
--------------------------------------------------- */
-document.querySelectorAll('a[href^="#"]').forEach((link) => {
-  link.addEventListener('click', (e) => {
-    const targetId = link.getAttribute('href').substring(1);
-    const target = document.getElementById(targetId);
+// 1.5. HAMBURGER MENU TOGGLE FOR MOBILE
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+const mobileMenu = document.getElementById('mobileMenu');
 
-    if (target) {
-      e.preventDefault();
-      const headerOffset = document.querySelector('.site-header')?.offsetHeight || 0;
-      const top = target.getBoundingClientRect().top + window.scrollY - headerOffset - 10;
-
-      window.scrollTo({
-        top,
-        behavior: 'smooth',
-      });
-    }
+if(hamburgerBtn && mobileMenu) {
+  hamburgerBtn.addEventListener('click', () => {
+    hamburgerBtn.classList.toggle('active');
+    mobileMenu.classList.toggle('active');
   });
-});
-
-/* --------------------------------------------------
-   MOBILE NAVIGATION
--------------------------------------------------- */
-const navToggle = document.querySelector('.nav__toggle');
-const navOverlay = document.querySelector('.nav__overlay');
-
-if (navToggle && navOverlay) {
-  navToggle.addEventListener('click', () => {
-    const isOpen = navToggle.classList.toggle('nav__toggle--open');
-    navOverlay.classList.toggle('nav__overlay--open');
-    navToggle.setAttribute('aria-expanded', String(isOpen));
-    navOverlay.setAttribute('aria-hidden', String(!isOpen));
-  });
-
-  navOverlay.querySelectorAll('.nav-link').forEach((link) => {
+  
+  // Close menu when a link is clicked
+  const mobileLinks = mobileMenu.querySelectorAll('.mobile-link, .mobile-link-cta');
+  mobileLinks.forEach(link => {
     link.addEventListener('click', () => {
-      navToggle.classList.remove('nav__toggle--open');
-      navOverlay.classList.remove('nav__overlay--open');
-      navToggle.setAttribute('aria-expanded', 'false');
-      navOverlay.setAttribute('aria-hidden', 'true');
-    });
-  });
-
-  document.addEventListener('click', (event) => {
-    if (!navOverlay.contains(event.target) && !navToggle.contains(event.target)) {
-      navToggle.classList.remove('nav__toggle--open');
-      navOverlay.classList.remove('nav__overlay--open');
-      navToggle.setAttribute('aria-expanded', 'false');
-      navOverlay.setAttribute('aria-hidden', 'true');
-    }
-  });
-}
-
-/* --------------------------------------------------
-   MAIN NAV TOGGLE
--------------------------------------------------- */
-const mainNavButton = document.querySelector('.hamburger');
-const mainNavMenu = document.querySelector('.main-nav__menu-wrapper');
-const mainNavLinks = document.querySelectorAll('.main-nav__menu a');
-
-if (mainNavButton && mainNavMenu) {
-  mainNavButton.addEventListener('click', () => {
-    const active = mainNavButton.classList.toggle('is-active');
-    mainNavMenu.classList.toggle('is-active');
-    mainNavButton.setAttribute('aria-expanded', active ? 'true' : 'false');
-    mainNavMenu.setAttribute('aria-hidden', active ? 'false' : 'true');
-  });
-
-  mainNavLinks.forEach((link) => {
-    link.addEventListener('click', () => {
-      mainNavButton.classList.remove('is-active');
-      mainNavMenu.classList.remove('is-active');
-      mainNavButton.setAttribute('aria-expanded', 'false');
-      mainNavMenu.setAttribute('aria-hidden', 'true');
+      hamburgerBtn.classList.remove('active');
+      mobileMenu.classList.remove('active');
     });
   });
 }
 
-/* --------------------------------------------------
-   SECTION REVEAL ANIMATIONS
--------------------------------------------------- */
+// 2. MOUSE MOVEMENT POSITION PARALLAX + LIVE CODE SNIPPET VALUES
+const canvasFrame = document.getElementById('canvasFrame');
+const watchShell = document.getElementById('watchShell');
+const codeX = document.getElementById('codeX');
+const codeY = document.getElementById('codeY');
 
-const animatedSections = document.querySelectorAll('[data-animate="section"]');
-
-const observerOptions = {
-  threshold: 0.15,
-};
-
-const animateSection = (section) => {
-  const fadeUps = section.querySelectorAll('.fade-up');
-  const fadeIns = section.querySelectorAll('.fade-in');
-  const imageReveals = section.querySelectorAll('.image-reveal img');
-
-  fadeUps.forEach((el, index) => {
-    el.style.transition = `opacity 600ms ease-out ${index * 80}ms, transform 600ms ease-out ${index * 80}ms`;
-    el.style.opacity = '1';
-    el.style.transform = 'translateY(0)';
-  });
-
-  fadeIns.forEach((el, index) => {
-    el.style.transition = `opacity 600ms ease-out ${index * 80}ms`;
-    el.style.opacity = '1';
-  });
-
-  imageReveals.forEach((img, index) => {
-    img.style.transition = `opacity 700ms ease-out ${index * 80}ms, transform 700ms ease-out ${index * 80}ms`;
-    img.style.opacity = '1';
-    img.style.transform = 'scale(1)';
-  });
-};
-
-const sectionObserver = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      animateSection(entry.target);
-      sectionObserver.unobserve(entry.target);
-    }
-  });
-}, observerOptions);
-
-animatedSections.forEach((section) => sectionObserver.observe(section));
-
-/* --------------------------------------------------
-   BACK TO TOP BUTTON
--------------------------------------------------- */
-const backToTop = document.querySelector('.footer__top');
-if (backToTop) {
-  backToTop.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-}
-
-/* --------------------------------------------------
-   CUSTOM CURSOR FOLLOWER
--------------------------------------------------- */
-const cursor = document.querySelector('.cursor');
-
-if (cursor) {
-  document.addEventListener('mousemove', (e) => {
-    cursor.style.left = `${e.clientX}px`;
-    cursor.style.top = `${e.clientY}px`;
-  });
-
-  document.addEventListener('mouseenter', () => {
-    cursor.style.opacity = '1';
-  });
-
-  document.addEventListener('mouseleave', () => {
-    cursor.style.opacity = '0';
-  });
-}
-
-/* --------------------------------------------------
-   MAGNETIC BUTTONS
--------------------------------------------------- */
-const magneticElements = document.querySelectorAll('.magnetic');
-
-magneticElements.forEach((el) => {
-  const strength = 0.3;
-
-  el.addEventListener('mousemove', (e) => {
-    const rect = el.getBoundingClientRect();
-    const relX = e.clientX - rect.left;
-    const relY = e.clientY - rect.top;
-    const moveX = (relX - rect.width / 2) * strength;
-    const moveY = (relY - rect.height / 2) * strength;
-
-    el.style.transform = `translate(${moveX}px, ${moveY}px)`;
-  });
-
-  el.addEventListener('mouseleave', () => {
-    el.style.transform = 'translate(0, 0)';
-  });
-
-  el.addEventListener('mouseenter', () => {
-    if (cursor) {
-      cursor.style.width = '32px';
-      cursor.style.height = '32px';
-      cursor.style.border = '1px solid rgba(0, 0, 0, 0.8)';
-    }
-  });
-
-  el.addEventListener('mouseleave', () => {
-    if (cursor) {
-      cursor.style.width = '22px';
-      cursor.style.height = '22px';
-      cursor.style.border = '1px solid rgba(0, 0, 0, 0.4)';
-    }
-  });
+canvasFrame.addEventListener('mousemove', (event) => {
+  const rect = canvasFrame.getBoundingClientRect();
+  
+  const xOffset = event.clientX - rect.left - (rect.width / 2);
+  const yOffset = event.clientY - rect.top - (rect.height / 2);
+  
+  document.documentElement.style.setProperty('--mx', `${xOffset}px`);
+  document.documentElement.style.setProperty('--my', `${yOffset}px`);
+  
+  // Dynamic code values calculation for inside the watch display
+  if(codeX && codeY) {
+    codeX.textContent = `${Math.round(xOffset / 4)}px`;
+    codeY.textContent = `${Math.round(yOffset / 4)}px`;
+  }
+  
+  const tiltX = (yOffset / rect.height) * -20;
+  const tiltY = (xOffset / rect.width) * 20;
+  
+  watchShell.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
 });
 
-/* --------------------------------------------------
-   CURSOR HOVER SCALING ON INTERACTIVE ELEMENTS
--------------------------------------------------- */
-const interactiveSelectors = [
-  'a',
-  'button',
-  '.work-card-wrapper',
-  '.about__portrait-card'
-];
+canvasFrame.addEventListener('mouseleave', () => {
+  document.documentElement.style.setProperty('--mx', '0px');
+  document.documentElement.style.setProperty('--my', '0px');
+  watchShell.style.transform = `rotateX(0deg) rotateY(0deg)`;
+  if(codeX && codeY) {
+    codeX.textContent = `0px`;
+    codeY.textContent = `0px`;
+  }
+});
 
-const interactiveElements = document.querySelectorAll(interactiveSelectors.join(','));
+// 3. THEME INTERACTIVE CROWN: TOGGLE INTERACTIVE BLUEPRINT STATE
+const themeCrown = document.getElementById('themeCrown');
+const modeLabel = document.getElementById('modeLabel');
+const statusLabel = document.getElementById('statusLabel');
+const footerLeft = document.getElementById('footerLeft');
+const footerRight = document.getElementById('footerRight');
+const hintText = document.getElementById('hintText');
 
-interactiveElements.forEach((el) => {
-  el.addEventListener('mouseenter', () => {
-    if (cursor) {
-      cursor.style.width = '28px';
-      cursor.style.height = '28px';
-      cursor.style.border = '1px solid rgba(0, 0, 0, 0.8)';
-    }
-  });
-
-  el.addEventListener('mouseleave', () => {
-    if (cursor) {
-      cursor.style.width = '22px';
-      cursor.style.height = '22px';
-      cursor.style.border = '1px solid rgba(0, 0, 0, 0.4)';
-    }
-  });
+themeCrown.addEventListener('click', () => {
+  const currentTheme = document.documentElement.getAttribute('data-theme');
+  
+  if (currentTheme === 'blueprint') {
+    // Return back to elegant normal preview system
+    document.documentElement.removeAttribute('data-theme');
+    modeLabel.textContent = "UI / MODE";
+    statusLabel.textContent = "RENDERED";
+    footerLeft.textContent = "315° NW";
+    footerRight.textContent = "v1.0.2";
+    hintText.textContent = "Click the watch crown to inspect code";
+  } else {
+    // Engage system wireframe engine structural layout modifications
+    document.documentElement.setAttribute('data-theme', 'blueprint');
+    modeLabel.textContent = "INTERACTION";
+    statusLabel.textContent = "DEBUG";
+    footerLeft.textContent = "GRID: 20PX";
+    footerRight.textContent = "COMPILATION";
+    hintText.textContent = "Click crown to return to preview framework";
+  }
 });
